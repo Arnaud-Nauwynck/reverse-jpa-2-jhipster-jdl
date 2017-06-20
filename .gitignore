@@ -3,4 +3,7 @@ target
 .classpath
 .settings
 *.launch
-
+*.*~
+*.swp
+build/
+.gradle/
