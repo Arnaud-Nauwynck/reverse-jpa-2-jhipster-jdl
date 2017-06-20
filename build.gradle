@@ -1,18 +1,15 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 
-group = 'io.github.jhipster'
+group = 'com.wordpress.macyves.tools'
 version = '0.0.1-SNAPSHOT'
 
-description = """"""
+description = "jpa2jdl"
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-
-
 repositories {
-        
      maven { url "http://repo.maven.apache.org/maven2" }
 }
 dependencies {
@@ -23,4 +20,23 @@ dependencies {
     compile group: 'org.hibernate', name: 'hibernate-validator', version:'5.2.4.Final'
     runtime group: 'ch.qos.logback', name: 'logback-classic', version:'1.1.5'
     testCompile group: 'junit', name: 'junit', version:'4.12'
+}
+
+task execute(type: JavaExec, dependsOn: 'prep') {
+    classpath = sourceSets.main.runtimeClasspath
+    main = project.hasProperty("mainClass") ? project.getProperty("mainClass") : "io.github.jhipster.jpa2jdl.ReverseJPA2JDLMain"
+}
+
+task('prep') {
+    doLast {
+        if(System.getProperty("args") != null) {
+            execute.enabled = true
+            execute.args System.getProperty("args").split()
+            println execute.args
+        } else {
+            println 'No args supplied.'
+            println 'Usage: gradle execute -Dargs=\'--packageName=blahblah\''
+            execute.enabled = false            
+        }
+    }	
 }
