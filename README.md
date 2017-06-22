@@ -6,4 +6,6 @@ Upstream:	https://github.com/Arnaud-Nauwynck/reverse-jpa-2-jhipster-jdl
 # jpa2jdl
 Parse existing JPA Entities classes (from .jar/.class) and dump jhipster JDL file.
 
+To run: `gradle execute -Dargs='--packageName=blahblah'`
+
 
